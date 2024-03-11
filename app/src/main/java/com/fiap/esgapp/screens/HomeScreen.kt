@@ -1,8 +1,5 @@
-package com.fiap.esgapp
+package com.fiap.esgapp.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,8 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,21 +32,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.fiap.esgapp.R
 import com.fiap.esgapp.ui.theme.ESGAppTheme
 
-class HomeActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ESGAppTheme {
-                HomeScreen()
-            }
-        }
-    }
-}
-
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController? = null) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(color = Color(0xFFF7F7F7)),
@@ -110,7 +97,16 @@ fun HomeScreen() {
                         )
                     }
                 }
-                Icon(painter = painterResource(id = R.drawable.exit), contentDescription = "Exit Icon")
+                IconButton(onClick = {
+                    if (navController != null) {
+                        navController.navigate("login")
+                    }
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.exit),
+                        contentDescription = "Exit Icon"
+                    )
+                }
             }
 
             //Recommendations section
